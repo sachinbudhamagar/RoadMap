@@ -6,8 +6,30 @@ Task 1.2 — Decision Explosion
     Only ONE path leads to success
     Write the paths first. Code later.
 
-
+start 
+state: prompting
+state: validating_input 
+state: format_invalid
+state: security_conflict
+state: syntax_error
+state: policy_violation
+state: awaiting_retry
+state: success
+end
 
 #STATE
+start
+state: inserting_username
+state: inserting_age
+state: inserting_email
+state: confirmation
+state: validating_inputs
+state: invalid_format_details
+state: awaiting_retry
+state: success
+state: inserting_exit
+end
+
+
 
 #TRANSITIONS
