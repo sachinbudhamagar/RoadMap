@@ -1,0 +1,13 @@
+==========================>Task<=======================
+Task 1.2 — Decision Explosion
+    Design logic where:
+    One input creates at least 5 possible paths
+    Each path produces a different outcome
+    Only ONE path leads to success
+    Write the paths first. Code later.
+
+
+
+#STATE
+
+#TRANSITIONS
