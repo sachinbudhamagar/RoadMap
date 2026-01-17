@@ -1,18 +1,18 @@
-prompt = input("Enter to reach right path: ").lower()
-
-def violates_policy():
+def violates_policy(prompt):
     banned = ["spam", "hack", "illegal"]
     return any(word in prompt for word in banned)
 
-def conflict_security():
+def conflict_security(prompt):
     risk = ["admin", "root", "password"]
     return any(word in prompt for word in risk)
 
-def syntax_error(): 
+def syntax_error(prompt): 
     return prompt.count("(") != prompt.count(")")
 
-def format_error():
+def format_error(prompt):
     return len(prompt) < 3 or len(prompt) > 10
+
+prompt = input("Enter to reach right path: ").lower()
 
 def validating_prompt(prompt: str):
     failure = []
