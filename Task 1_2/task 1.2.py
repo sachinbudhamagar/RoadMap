@@ -44,7 +44,7 @@ def validating_prompt(prompt: str, attempt_num: int):
         if p in failure: 
             return p, failure #Exit on 1st priority error
     
-    return "success", [] #print success if no error is found
+    return "success", [] #print success if no error is found (note: return 2 values failure and success)
 
 def main():
     attempt_count = 0
@@ -61,7 +61,7 @@ def main():
 
         attempt_count += 1
 
-        result, error = validating_prompt(prompt, attempt_count)
+        result, error = validating_prompt(prompt, attempt_count) #check result and error at the sametime for single output as value1 and value2
         print(f"\nValidation Result: {result}")
 
         if error: #Print error reason
