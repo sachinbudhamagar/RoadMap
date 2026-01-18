@@ -44,17 +44,16 @@ def validating_prompt(prompt: str, attempt_num: int):
         if p in failure: 
             return p, failure #Exit on 1st priority error
     
-    return "Success", [] #print success if no error is found
+    return "success", [] #print success if no error is found
 
 def main():
     attempt_count = 0
-    print(f"Enter prompt to validate (max {max_attempts} attempts")
+
+    print(f"\nEnter prompt to validate (max {max_attempts} attempts")
     print(f"Type q for quit or exit\n")
 
     while True:
-        prompt = input("Enter prompt to validate: ").lower()
-        result, error = validating_prompt(prompt) #calling validation function 
-        print(f"Validation Result: {result}")
+        prompt = input("Enter prompt to validate: ").lower().strip()
 
         if prompt == "q":
             print("Exiting program ...")
@@ -63,20 +62,19 @@ def main():
         attempt_count += 1
 
         result, error = validating_prompt(prompt, attempt_count)
-        print(f"Validating Result: {result}")
-
-        if result == "Success":
-            print("VAlidation passed! Exiting program")
-            break
+        print(f"\nValidation Result: {result}")
 
         if error: #Print error reason
-            print(f"Error found: {error}")
-
+            print(f"\nError found: {error}")
         
-        if attempt_count >= max_attempts:
-            print(f"\nToo many attempts! ({max_attempts})")
+        if result == "success":
+            print("Validation passed")
             break
-    
+
+        if attempt_count >= max_attempts:
+            print(f"\nMaximum attempts ({max_attempts}) reached. Exiting")
+            break
+
         remaining = max_attempts - attempt_count
         print (f"Attempts Remaining: {remaining}\n")
 
