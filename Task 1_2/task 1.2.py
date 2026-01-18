@@ -6,6 +6,10 @@ def conflict_security(prompt):
     risk = ["admin", "root", "password"]
     return any(word in prompt for word in risk)
 
+def prompt_limit(prompt):
+    for prompt in range(3):
+        return prompt
+
 def syntax_error(prompt): 
     return prompt.count("(") != prompt.count(")")
 
@@ -20,12 +24,14 @@ def validating_prompt(prompt: str):
         failure.append("Policy violation")
     if conflict_security(prompt):
         failure.append("Security conflict")
+    if prompt_limit(prompt):
+        failure.append("Prompt limit exceed")
     if syntax_error(prompt):
         failure.append("Syntax error")
     if format_error(prompt):
         failure.append("Format error")
     
-    priority = ["Policy violation", "Security conflict", "Syntax error", "Format error"]
+    priority = ["Policy violation", "Security conflict", "Prompt limit exceed", "Syntax error", "Format error"]
     for p in priority: #checks error priority order list 
         if p in failure: 
             return p, failure #Exit on 1st priority error
