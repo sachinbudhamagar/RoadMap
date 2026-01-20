@@ -39,5 +39,4 @@ def passwordchecker():
         print(f"\n Account locked: Multiple failed attempt {max_attempt}")
             
 
-checker = passwordchecker()
-checker.passwordchecker()
+passwordchecker()
