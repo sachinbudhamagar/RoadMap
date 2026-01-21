@@ -1,33 +1,27 @@
 
 **1.INPUT:**
-
  	What information enters the system?
 
 **2.STATE:**
-
  	What must happen to the input?
 
 **3.DECISION:**
-
  	What conditions change the path?
 
 **4.OUTPUT:**
-
  	What is produced?
 
 
 
 ## **WRITE**
-
 -->What line runs first
-
 -->what can stop execution
-
 -->What repeats
 
 
 
 =============>Task<=================
+
 Task 1.1 — Input Gate
     Accept input
     Reject empty input
@@ -46,35 +40,22 @@ Task 1.1 — Input Gate
 **1.1**
 
 start
-
 state: Inserting_input
-
 state: validating_input
-
 state: invalid_format_input
-
 state: awaiting_retry
-
 state: success
-
 state: inserting_exit
 
 
 
 **#Transitions**
-
 inserting_input + input received -> validating_input
-
 validating_input + is_invalid_format -> awaiting_retry
-
 validating_input + is_valid_format -> success
-
 awaiting_retry + user_decides_yes -> inserting_input
-
 success + user_wants_more -> inserting_input
-
 success + user_done -> inserting_exit
-
 inserting_exit -> exit
 
 
@@ -82,9 +63,7 @@ inserting_exit -> exit
 
 
 #**Pseudocode**
-
 Start
-
 inserting_input
 validating_input input format
 if input format equals success
