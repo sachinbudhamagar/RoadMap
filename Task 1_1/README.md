@@ -15,7 +15,9 @@
 
 ## **WRITE**
 -->What line runs first
+
 -->what can stop execution
+
 -->What repeats
 
 
@@ -23,15 +25,23 @@
 =============>Task<=================
 
 Task 1.1 — Input Gate
+
     Accept input
+	
     Reject empty input
+	
     Reject whitespace-only input
+	
     Re-prompt until valid
+	
     Exit only when user explicitly chooses
 
 ⚠️ Forbidden:
+
     break without reason
+	
     infinite loops without exit plan
+	
 
 
 
