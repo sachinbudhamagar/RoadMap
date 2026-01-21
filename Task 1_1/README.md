@@ -75,23 +75,24 @@ Task 1.1 — Input Gate
 
 #**Pseudocode**
 Start
-inserting_input
-validating_input input format
-if input format equals success
-	output success
-	if user decides continue
- 		inserting_input
-	else 
-		inserting_exit
 
-else 
-	output invalid awaiting_retry 
-	if user decides continue 				
-		inserting_input
+	inserting_input
+	validating_input input format
+	if input format equals success
+		output success
+		if user decides continue
+	 		inserting_input
+		else 
+			inserting_exit
+	
 	else 
-		inserting_exit
-
-end
+		output invalid awaiting_retry 
+		if user decides continue 				
+			inserting_input
+		else 
+			inserting_exit
+	
+	end
 
 		
 
