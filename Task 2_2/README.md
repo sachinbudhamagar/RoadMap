@@ -6,7 +6,7 @@
     Loop must exit in at least 2 different ways
 
 
-# STATE
+# State
 
     state: loop_active
     state: inserting_input
@@ -17,7 +17,7 @@
     state: exiting_program
 
 
-# TRANSITIONS
+# Transition
 
     start
     loop_active + loop_activated -> inserting_input
@@ -29,3 +29,19 @@
     success + user_decide_yes -> inserting_input
     success + user_decide_no -> exiting_program 
     end
+
+# Pseudocode
+
+    password is a testing
+    while True
+        input password
+        if input is exit
+            break
+
+        if input is test
+            print success 
+            break
+        else
+            print invalid input
+            continue
+            
