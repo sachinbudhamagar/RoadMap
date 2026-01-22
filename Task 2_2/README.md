@@ -32,9 +32,9 @@
 
 # Pseudocode
 
-    password is a testing
+    list is a test
     while True
-        input password
+        input 
         if input is exit
             break
 
