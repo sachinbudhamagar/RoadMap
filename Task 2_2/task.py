@@ -1,17 +1,23 @@
 print("\nEnter ok for beast mode")
 print("Enter q to quit/exit")
+beast_mode = True
 
 def bestMode():
     try:
-        while True:
+        while beast_mode:
             mode = input("\nTurn on the mode:- ")
-            if mode == "q":
+            if mode.lower() == "q":
                 print("Exiting program..")
                 break
 
-            if mode == "ok":
+            if mode.lower() == "ok":
                 print("Beast mode activated")
-                break
+                user_decision = input("\nDo you wish to continue? y/n:- ").lower()
+                if user_decision != "y":
+                    print("Exiting program.. ")
+                    break
+                else:
+                    continue
             else:
                 print("Invalid input!")
                 continue
