@@ -33,15 +33,25 @@
 # Pseudocode
 
     list is a test
-    while True
-        input 
-        if input is exit
-            break
+    beast mode is True
+    
+    define  function
+        try:
+            while beast mode
+                input Turn on beast mode 
+                if input is exit
+                    break
 
-        if input is test
-            print success 
-            break
-        else
-            print invalid input
-            continue
-             
+                if input is test
+                    print success 
+                    user decide with yes or no
+                    if yes
+                        continue
+                    else
+                        break
+                else
+                    print invalid input
+                    continue
+        except keyboard Interrupt  
+            print exiting program
+                
