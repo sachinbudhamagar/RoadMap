@@ -1,4 +1,4 @@
-Task 1.3 — Return Discipline
+# Task 1.3 — Return Discipline
 
     Create 3 functions where:
     One returns a value
@@ -8,7 +8,7 @@ Task 1.3 — Return Discipline
     Where execution goes after each return
 
 
-#STATE
+# State
 
     start
     state: calling_fuction
@@ -18,7 +18,7 @@ Task 1.3 — Return Discipline
     state: exiting_program
     end
 
-#TRANSITIONS
+# Transitions
 
     start
     calling_fuction + function_received -> executing_function
@@ -30,7 +30,7 @@ Task 1.3 — Return Discipline
     end
 
 
-#PSEUDOCODE
+# Pseudocode
 
     start
     define function1
