@@ -15,39 +15,23 @@
 
 ## **WRITE**
 -->What line runs first
-
 -->what can stop execution
-
 -->What repeats
 
-
-
 =============>Task<=================
-
-Task 1.1 — Input Gate
+# Task 1.1 — Input Gate
 
     Accept input
-	
     Reject empty input
-	
     Reject whitespace-only input
-	
     Re-prompt until valid
-	
     Exit only when user explicitly chooses
 
-⚠️ Forbidden:
-
+ Forbidden:
     break without reason
-	
     infinite loops without exit plan
-	
 
-
-
-**Input Gate**
-
-**1.1**
+# State
 
 	start
 	state: Inserting_input
@@ -59,7 +43,7 @@ Task 1.1 — Input Gate
 
 
 
-**#Transitions**
+# Transitions
 
 	inserting_input + input received -> validating_input
 	validating_input + is_invalid_format -> awaiting_retry
@@ -73,9 +57,9 @@ Task 1.1 — Input Gate
 
 
 
-#**Pseudocode**
-Start
+# Pseudocode
 
+	Start
 	inserting_input
 	validating_input input format
 	if input format equals success
