@@ -1,4 +1,4 @@
-Task 2.3 — Silent Failure
+# Task 2.3 — Silent Failure
 
     Design a function that:
     Fails silently in one case
