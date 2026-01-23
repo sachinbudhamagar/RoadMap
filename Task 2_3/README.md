@@ -28,3 +28,19 @@ Task 2.3 — Silent Failure
     final_output + is_exit -> terminate
     end
 
+# Pseudocode
+
+    start
+
+    creatinng empty list
+    
+    inserting input
+    if input triggers error
+        raise error
+    else
+        pass
+    
+    if input is valid
+        add input in list
+        print list
+        return
