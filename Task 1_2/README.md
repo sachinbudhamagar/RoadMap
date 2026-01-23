@@ -1,6 +1,6 @@
 ==========================>Task<=======================
 
-Task 1.2 — Decision Explosion
+# Task 1.2 — Decision Explosion
 
     Design logic where:
     One input creates at least 5 possible paths
@@ -8,7 +8,7 @@ Task 1.2 — Decision Explosion
     Only ONE path leads to success
     Write the paths first. Code later.
 
-#STATE
+# State
 
     start 
     state: prompting
@@ -23,7 +23,7 @@ Task 1.2 — Decision Explosion
     state: success
     end
 
-#TRANSITIONS
+# Transitions
 
     start
     prompting + input_received -> validating_input
@@ -43,7 +43,7 @@ Task 1.2 — Decision Explosion
     validating_input + is_valid -> success
     end
 
-#PSEUDOCODE
+# Pseudocode
 
     start
     prompting
@@ -74,14 +74,14 @@ Task 1.2 — Decision Explosion
     end
 
 
-Task 1.2.1 — Login 
+# Task 1.2.1 — Login 
 
     Design logic where:
     One input username, age, email
     And Login
     Write the paths first. Code later.
 
-#STATE
+# State
 
     start
     state: inserting_username
@@ -95,4 +95,3 @@ Task 1.2.1 — Login
     state: inserting_exit
     end
 
-#TRANSITIONS
