@@ -10,12 +10,21 @@ Task 2.3 — Silent Failure
 
     start
     state: inserting_input
-    state: add_input_list
-    state: raise_error
-    state: ignore_input
-    state: check_list
-    state: output_list
+    state: silent_fail_condition
+    state: check_raise_error
+    state: add_to_list
+    state: final_output
+    state: exit
     end
 
-     
+# Transition
+
+    start
+    inserting_input + input_received -> silent_fail_condition
+    silent_fail_condition + is_valid -> check_raise_error
+    check_raise_error + is_error -> terminate
+    silent_fail_condition + is_invalid -> add_to_list
+    add_to_list + input_added -> final_output
+    final_output + is_exit -> terminate
+    end
 
