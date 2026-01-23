@@ -1,4 +1,4 @@
-Task 2.1 — Nested Conditions Hell
+# Task 2.1 — Nested Conditions Hell
 
     Create logic with:
     At least 3 nested if levels
@@ -7,7 +7,7 @@ Task 2.1 — Nested Conditions Hell
     If you get confused, that’s the point.
 
 
-#STATE
+# State
 
     start
     state: inserting_input
@@ -21,7 +21,7 @@ Task 2.1 — Nested Conditions Hell
     state: exiting_on_success
     end
 
-#TRANSITIONS
+# Transitions
 
     start
     inserting_input + input_received -> checking_validation
@@ -35,7 +35,7 @@ Task 2.1 — Nested Conditions Hell
     success + is_ouput -> exiting_program
     end
 
-#Pseudocode
+# Pseudocode
 
     start
     print Enter input or enter quit to exit program
