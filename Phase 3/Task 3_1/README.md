@@ -1,23 +1,14 @@
 # Task 3.1 — English-Only Algorithms
 
-    Pick any system:
-        Login
-        Payment
-        File upload
-        Job apply
-        ATM
+    Pick system:
+        1. Login
+        2. Payment
+        3. File upload
+        4. Job apply
+        5. ATM
 
-    Write:
-        INPUTS:
-        STATES:
-        DECISIONS:
-        FAILURES:
-        SUCCESS CONDITIONS:
-        EXIT POINTS:
 
-No code allowed until this is complete.
-
-# State of Login
+# State of Login system
 
     start
     state: inserting_credentials
@@ -62,10 +53,22 @@ No code allowed until this is complete.
             else
                 print invalid_credentials
                 awaiting_retry
-                    propt try again (y/n)
+                    prompt try again (y/n)
                     if input != y
                         break 
                     else
                         continue
     end
     
+
+# English only Algorithm of Login system
+
+    1. define attempts and max attempts
+    2. input username and password or quit program
+    3. if input is exit, terminate program 
+    4. if username and password is valid, print login successful
+    5. if username and password is invalid
+    6. count attempts and subtract it from max attempts
+    7. if attempts reached max attempts, terminate program
+    8. if attempts is remaining ask user either wants retry or not
+    9. if press y, restarting input else terminate program
