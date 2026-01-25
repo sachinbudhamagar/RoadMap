@@ -72,3 +72,8 @@
     7. if attempts reached max attempts, terminate program
     8. if attempts is remaining ask user either wants retry or not
     9. if press y, restarting input else terminate program
+
+
+# State of Payment
+
+    
