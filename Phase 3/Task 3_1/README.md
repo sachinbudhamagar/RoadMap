@@ -8,7 +8,7 @@
         5. ATM
 
 
-# State of Login system
+# 1. State of Login system
 
     start
     state: inserting_credentials
@@ -74,6 +74,6 @@
     9. if press y, restarting input else terminate program
 
 
-# State of Payment
+# 2. State of Payment System
 
     
