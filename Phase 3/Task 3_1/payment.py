@@ -1,49 +1,51 @@
-Total_Amount = 100
+class PaymentSystem:
+    def __init__(self, total_amount=100):
+        self.balance = total_amount
 
-
-def payment():
-
-    try:
-        amount = int(input("Enter Amount:- "))
-        if amount <= Total_Amount:
-            remaining = Total_Amount - amount
-            print(f"\n{amount} paid successfully")
-            print(f"Remaining amount is {remaining}\n")
-        else:
-            print("Transaction failed! Try Again")
-    except KeyboardInterrupt:
-        print("Exiting program..")
-        return
-
-
-def check():
-    print(Total_Amount)
-
-
-def main():
-    print("\n========> Payment System <========\n")
-    print("Press 1: Payment")
-    print("Press 2: Check Amount")
-    print("Press 3: Quit\n")
-
-    while True:
+    def payment(self):
         try:
-            press = int(input("Enter no.:- "))
-            if press == 1:
-                payment()
+            amount = int(input("Enter Amount:- "))
+            if amount <= 0:
+                print("Amount must be positive.")
 
-            elif press == 2:
-                check()
-            elif press == 3:
-                break
+            if amount <= self.balance:
+                self.balance -= amount
+                print(f"\n{amount} paid successfully")
+                print(f"Remaining amount is {self.balance}\n")
             else:
-                print("Invalid input! Try again")
-                continue
-        except KeyboardInterrupt:
-            print("Exiting program..")
-            break
+                print(f"Insufficient funds! (Available{self.balance})")
+        except ValueError:
+            print("Invalid input! Enter number")
+
+    def check(self):
+        print(f"\nCurrent balance: {self.balance}")
+
+    def main(self):
+        print("\n========> Payment System <========\n")
+
+        while True:
+            print("Press 1: Payment")
+            print("Press 2: Check Amount")
+            print("Press 3: Quit\n")
+
+            try:
+                choice = int(input("Enter no.:- "))
+                if choice == 1:
+                    self.payment()
+
+                elif choice == 2:
+                    self.check()
+                elif choice == 3:
+                    print("Exiting program..")
+                    break
+                else:
+                    print("Invalid input! Enter 1, 2, or 3")
+                    continue
+            except KeyboardInterrupt:
+                print("Exiting program..")
+                break
 
 
 if __name__ == "__main__":
-    result = main()
-    print(result)
+    result = PaymentSystem()
+    result.main()
