@@ -1,6 +1,6 @@
 # Task 3.1 — English-Only Algorithms
 
-    Pick system:
+    Systems:
         1. Login
         2. Payment
         3. File upload
@@ -76,4 +76,4 @@
 
 # 2. State of Payment System
 
-    
+    state: 
