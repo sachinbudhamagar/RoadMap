@@ -5,6 +5,7 @@ class PaymentSystem:
     def payment(self):
         try:
             amount = int(input("Enter Amount:- "))
+
             if amount <= 0:
                 print("Amount must be positive.")
 
@@ -15,10 +16,14 @@ class PaymentSystem:
             else:
                 print(f"Insufficient funds! (Available{self.balance})")
         except ValueError:
-            print("Invalid input! Enter number")
+            print("Invalid input! Enter amount\n")
+
+        except KeyboardInterrupt:
+            print("Exiting program ..\n")
+            exit()
 
     def check(self):
-        print(f"\nCurrent balance: {self.balance}")
+        print(f"Current balance: {self.balance}\n")
 
     def main(self):
         print("\n========> Payment System <========\n")
@@ -36,13 +41,16 @@ class PaymentSystem:
                 elif choice == 2:
                     self.check()
                 elif choice == 3:
-                    print("Exiting program..")
+                    print("Exiting program..\n")
                     break
                 else:
-                    print("Invalid input! Enter 1, 2, or 3")
+                    print("Invalid input")
                     continue
+            except ValueError:
+                print("Invalid input! Enter 1, 2, or 3\n")
+                continue
             except KeyboardInterrupt:
-                print("Exiting program..")
+                print("Exiting program ..\n")
                 break
 
 
