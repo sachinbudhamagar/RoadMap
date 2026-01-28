@@ -24,12 +24,16 @@
 
     start
     inserting_credentials + credentials_received -> validating_credentials
+
     validating_credentials + is_valid -> success
     validating_credentials + is_invalid -> invalid_credentials
+
     invalid_credentials + attempts_remaining -> awaiting_retry
     invalid_credentials + max_attempts_reached -> reach_max_attempts
+
     awaiting_retry + user_decide_continue -> inserting_credentials
     awaiting_retry + user_decide_exit -> exiting_program
+    
     reach_max_attempts + force_exit -> exiting_program
     end
     
@@ -80,7 +84,33 @@
     state: inserting_input
     state: validate_input
     state: invalid_input
+    state: check_funds
+    state: insufficient_funds
     state: awaiting retry
     state: success
     state: exiting_program
     end
+
+# Transitions
+
+    start
+    inserting_input + input_received -> validate_input
+    inserting_inupt + exit_requested -> exiting_program
+
+    validate_input + is_invalid -> invalid_input
+    validate_input + is_valid -> check_funds
+
+    check_funds + is_insufficient -> insufficient_funds
+    check_funds + is_sufficient -> success
+
+    invalid_input + is_retry -> awaiting_retry
+    insufficient_funds + is_retry -> awaiting_retry
+
+    awaiting_retry -> inserting_input
+    awaiting_retry + exit_requested -> exiting_program 
+    
+    success -> exiting_program
+    end
+
+# Pseudocode
+

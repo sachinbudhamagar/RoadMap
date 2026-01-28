@@ -46,11 +46,15 @@
 # Transitions
 
 	inserting_input + input received -> validating_input
+
 	validating_input + is_invalid_format -> awaiting_retry
 	validating_input + is_valid_format -> success
+
 	awaiting_retry + user_decides_yes -> inserting_input
+
 	success + user_wants_more -> inserting_input
 	success + user_done -> inserting_exit
+	
 	inserting_exit -> exit
 
 

@@ -27,18 +27,25 @@
 
     start
     prompting + input_received -> validating_input
+
     validating_input + is_exceed_limit -> limit_exceed
     limit_exceed + giving_time -> awaiting_retry
+
     validating_input + is_multiple_error -> priority_order
     priority_order + checking_priority_order -> awaiting_retry
+
     validating_input + is_format_invalid -> format_invalid
     format_invalid + inserting_prompt -> awaiting_retry
+
     validating_input + is_security_invalid -> security_conflict
     security_conflict + inserting_prompt -> awaiting_retry
+
     validating_input + is_syntax_invalid -> syntax_error
     syntax_error + inserting_prompt -> awaiting_retry
+
     validating_input + is_violating_policy -> policy_violtion
     policy_violtion + inserting_prompt -> awaiting_retry
+
     awaiting_retry + inserting_prompt -> validating_input
     validating_input + is_valid -> success
     end

@@ -23,8 +23,10 @@
     start
     calling_fuction + function_received -> executing_function
     executing_function + returning_none -> after_function_call
+
     executing_function + returning_value -> after_function_call
     executing_function + returning_value_conditionally -> after_function_call
+    
     after_function_call + program_decides_exit -> function_terminates
     function_terminates + program_end -> exiting_program
     end

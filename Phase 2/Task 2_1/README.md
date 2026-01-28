@@ -25,12 +25,16 @@
 
     start
     inserting_input + input_received -> checking_validation
+
     checking_validation + is_invalid -> exiting_on_invalid
     checking_validation + is_valid -> checking_permission
+
     checking_permission + is_not_granted -> exiting_on_not_granted
     checking_permission + is_granted -> matching_input
+
     matching_input + is_unmatched -> unmatched_allow_retry
     matching_input + is_matched -> success
+    
     unmatched_allow_retry + is_retry -> inserting_input
     success + is_ouput -> exiting_program
     end

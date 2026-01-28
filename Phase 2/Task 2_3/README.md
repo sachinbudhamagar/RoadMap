@@ -21,10 +21,13 @@
 
     start
     inserting_input + input_received -> silent_fail_condition
+
     silent_fail_condition + is_valid -> check_raise_error
-    check_raise_error + is_error -> terminate
     silent_fail_condition + is_invalid -> add_to_list
+
+    check_raise_error + is_error -> terminate
     add_to_list + input_added -> final_output
+    
     final_output + is_exit -> terminate
     end
 
