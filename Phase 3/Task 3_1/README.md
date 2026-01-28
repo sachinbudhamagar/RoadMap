@@ -76,4 +76,11 @@
 
 # 2. State of Payment System
 
-    state: 
+    start
+    state: inserting_input
+    state: validate_input
+    state: invalid_input
+    state: awaiting retry
+    state: success
+    state: exiting_program
+    end
