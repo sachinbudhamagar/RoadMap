@@ -145,6 +145,7 @@
 
         main function
             while True
+                choose program to run
                 if input is 1
                     call payment function
                 if input is 2
@@ -157,3 +158,22 @@
     result is class
     call main function
     end
+
+
+# English only Algorithm of Payment system
+
+    create class and initial function for total fund as shared class state
+    crete a payment function that accepts user input
+    if user input is exit command, terminate program
+    validate the input to ensure it as a number
+    if input is invalid display input message and allow retry
+    if input is valid, check whether the amount is les than or equals to available funds
+    if the amount exceeds the available funds, display insufficient funds and allow retry
+    if sufficient funds are available, subtract the amount and confirm successfull payment
+    create seperate function to dispaly funds when user requested
+    create main function allow to choose between making payment, checking funds, or exiting
+    create object for class and invoke the main function start the program
+
+
+
+
