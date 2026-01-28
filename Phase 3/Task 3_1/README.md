@@ -33,7 +33,7 @@
 
     awaiting_retry + user_decide_continue -> inserting_credentials
     awaiting_retry + user_decide_exit -> exiting_program
-    
+
     reach_max_attempts + force_exit -> exiting_program
     end
     
@@ -114,3 +114,46 @@
 
 # Pseudocode
 
+    start
+    create class
+
+        initital function 
+            total_fund is 100
+
+        define payment function
+            while True
+                inserting_input
+
+                if inserting_input is exit
+                    exit program
+
+                if inserting_input is integer/number
+                    if inserting_input is less or equal total_fund
+                        subtract input from total_fund
+                        print successfully payed with remaining balance
+                    else
+                        print insufficient funds
+                        waiting retry
+                
+                else
+                    print invalid input
+                    awaiting_retry
+                    continue
+            
+        define checkFunds function
+            print total funds
+
+        main function
+            while True
+                if input is 1
+                    call payment function
+                if input is 2
+                    call checkFunds function
+                if input is 3 
+                    exit program
+                    break
+
+    create object 
+    result is class
+    call main function
+    end
