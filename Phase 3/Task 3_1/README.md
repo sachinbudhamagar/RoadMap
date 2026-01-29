@@ -176,5 +176,35 @@
 
 # 2. State of File Upload system
 
-    
+    state: inserting_file
+    state: validating_file
+    state: file_not_selected
+    state: upload_click
+    state: invalid_file
+    state: awaiting_retry
+    state: upload_failure
+    state: uploaded_successfully
+    state: exit_program
 
+# Transitions
+    
+    inserting_file + file_received -> validating_file
+    inserting_file + is_empty -> file_not_selected
+
+    validating_file + is_valid -> upload_click
+    validating_file + is_invalid -> invalid_file
+
+    file_not_selected + is_retry -> awaiting_retry
+    file_not_selected + is_exit -> exit_program
+
+    invalid_file + is_retry -> awaiting_retry
+    invalid_file + is_exit -> exit_program
+
+    awaiting_retry + is_continue -> inserting_file
+    awaiting_retry + is_exit -> exit_program
+
+    upload_click + is_fail -> upload_failure
+    upload_click + is_success -> uploaded_successfully
+    upload_click + is_cancel -> exit_program
+
+    uploaded_successfully -> exit_program
