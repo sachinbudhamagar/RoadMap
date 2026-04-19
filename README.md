@@ -2,7 +2,7 @@
 
   Understanding logic and algorithms
 
-=========>TASKS<========
+# =========>TASKS<========
 
 # ⚠️ RULES 
 
@@ -13,8 +13,8 @@
 
 # 🧠 PHASE 0 — REPROGRAM YOUR THINKING (NO CODE)
 Task 0.1 — Execution Awareness
-
 Understanding
+
     what line runs first
     what can stop execution
     what repeats
@@ -24,6 +24,7 @@ Task 0.2 — State Thinking
 
 For any problem, list states, not steps.
 Example format (DO NOT solve):
+
     STATE: waiting_for_input
     STATE: input_invalid
     STATE: input_valid
@@ -45,6 +46,7 @@ If you can’t list states, you’re not allowed to code.
     Exit only when user explicitly chooses
 
 ⚠️ Forbidden:
+
     break without reason
     infinite loops without exit plan
 
@@ -65,9 +67,7 @@ If you can’t list states, you’re not allowed to code.
     Explain (to yourself):
     Where execution goes after each return
 
-state
-
-# 🔩 PHASE 2 — CONTROL FLOW PAIN (THIS HURTS)
+# 🔩 PHASE 2 — CONTROL FLOW PAIN 
 
 # Task 2.1 — Nested Conditions Hell
 
