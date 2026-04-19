@@ -2,7 +2,7 @@
 
   Understanding logic and algorithms
 
-# =========>TASKS<========
+# ===========================> TASKS <==========================
 
 # ⚠️ RULES 
 
@@ -183,7 +183,7 @@ If you can’t list states, you’re not allowed to code.
 
 # 🔥 PHASE 7 — MASTERY CHECK (THIS IS HARD)
 
-    You are not allowed to move forward until:
-    You can explain execution order without running code
-    You know where every return goes
-    You can list all exit points
+    Not allowed to move forward until:
+    Explain execution order without running code
+    Know where every return goes
+    List all exit points
