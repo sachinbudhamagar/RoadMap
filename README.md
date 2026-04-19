@@ -2,7 +2,7 @@
 
   Understanding logic and algorithms
 
-# ===========================> TASKS <==========================
+# ==============> TASKS <==============
 
 # ⚠️ RULES 
 
