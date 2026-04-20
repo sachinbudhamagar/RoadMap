@@ -7,7 +7,6 @@
         4. Job apply
         5. ATM
 
-
 # 1. State of Login system
 
     start
@@ -176,35 +175,41 @@
 
 # 2. State of File Upload system
 
-    state: inserting_file
-    state: validating_file
-    state: file_not_selected
-    state: upload_click
-    state: invalid_file
-    state: awaiting_retry
-    state: upload_failure
-    state: uploaded_successfully
-    state: exit_program
+    state: idle
+    state: waiting_for_file
+    state: file_selected
+    state: file_validation_failed
+    state: file_validated
+    state: ready_to_upload
+    state: upload_in_progress
+    state: upload_fail
+    state: upload_completed
+    state: calcalled
+    state: exiting
 
 # Transitions
     
-    inserting_file + file_received -> validating_file
-    inserting_file + is_empty -> file_not_selected
+    idle + start_upload_process -> waiting_for_file
+    waiting_for_file + file_chosen -> file_selected
 
-    validating_file + is_valid -> upload_click
-    validating_file + is_invalid -> invalid_file
+    file_selected + validate_file -> validating
+    validating + valid -> file_validated
+    validating + invalid -> file_validation_failed
 
-    file_not_selected + is_retry -> awaiting_retry
-    file_not_selected + is_exit -> exit_program
+    file_validated -> ready_to_upload
+    file_validation_failed + retry_request -> awaiting_retry
 
-    invalid_file + is_retry -> awaiting_retry
-    invalid_file + is_exit -> exit_program
+    awaiting_retry + continue -> waiting_for_file
+    awaiting_retry + is_exit -> exiting_program
 
-    awaiting_retry + is_continue -> inserting_file
-    awaiting_retry + is_exit -> exit_program
+    ready_to_upload + upload_request -> upload_in_progress
 
-    upload_click + is_fail -> upload_failure
-    upload_click + is_success -> uploaded_successfully
-    upload_click + is_cancel -> exit_program
+    upload_in_progress + failed -> upload_failed
+    upload_in_progress + completed -> upload_completed
+    upload_in_progress + cancelled -> exiting_program
 
-    uploaded_successfully -> exit_program
+    upload_completed -> exiting_program
+
+# Pseudocode
+    
+    
