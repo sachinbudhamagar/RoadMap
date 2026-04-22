@@ -212,4 +212,91 @@
 
 # Pseudocode
     
-    
+    start
+    STATE = "idle"
+    WHILE system_running:
+
+        IF state == "idle":
+            Display "Ready. Select a file to upload"
+            WAIT FOR user_action
+
+            IF user_select_file:
+                STATE = "file_selected" 
+                STORE selected file
+            
+            ELSE IF user_exits:
+                STATE = "exiting_program"
+
+        ELSE IF STATE == "file_selected":
+            VALIDATE file (size, type, name)
+
+            IF validation_passed:
+                STATE = "file_validated"
+            ELSE:
+                STATE = "file_validation_failed"
+                STORE error_message
+            
+        ELSE IF STATE == "file_validated":
+            DISPLAY "Ready_to_upload file. Press upload to continue"
+            WAIT FOR user_action
+
+            IF user_clicks_upload:
+                STATE = "upload_in_progress"
+            ELSE IF user_cancels:
+                STATE = "cancelled"
+            ELSE IF user_changes_file:
+                STATE = "waiting_for_file"
+
+        ELSE IF STATE == "upload_in_progress":
+            START uploading file
+            SHOW progress bar
+
+            IF upload_successfull:
+                STATE = "upload_completed"
+            ELSE:
+                STATE = "upload_failed"
+                STORE error_message
+
+        ELSE IF STATE == "upload_completed":
+            DISPLAY "Upload Successfull!"
+            RESET form
+            STATE = "idle"
+        
+        ELSE IF STATE == "upload_failed":
+            DISPLAY error_message
+            ASK user: "Retry or Cancel?"
+
+            IF user_clicks_retry:
+                STATE = "ready_to_upload"
+            ELSE:
+                STATE = "Cancelled"
+
+        ELSE IF STATE == "cancelled":
+            CLEAR selected_file
+            RESET form
+            STATE = "idle"
+        
+        ELSE IF STATE == "exiting"
+            BREAK loop
+            
+# English only Algorithm of File Upload System
+
+1: Define STATE as "idle"
+2: Initiate WHILE loop
+3: IF STATE is "idle", display "ready for file upload" and wait for user action
+    IF user select file, store file and 
+    IF user select exit, exit program
+4: ELSE IF STATE is "file_selected", validate file(name, size, type)
+    IF validation passed STATE is "file_validated", 
+    ELSE STATE is "file_validation_failed" and display "error message"
+5: ELSE IF STATE is "file_validated", dispaly "Ready to upload file" and wait for user action
+    IF user click upload STATE IS "upload_in_process", 
+    ELSE IF user cancels STATE is "canelled", 
+    ELSE IF user changes file STATE is "waiting_for_file"
+6: ELSE IF STATE is "upload_in_progress", start uploading and show progress bar
+    IF upload successfull STATE is "upload_completed" ELSE "upload_failed", and store error message
+7: ELSE IF STATE is "upload_completed" display "upload successfull" and reset form where STATE is "idle"
+8: ELSE IF STATE is "upload_failed" display "error_message" and ask user either to "retry or cancel"
+    IF user click retry restart program where STATE is "ready_to_upload" else STATE is "cancelled"
+9: ELSE IF STATE is "cancelled"  clear selected file, reset form and restart where STATE is "idle"
+10: ELSE IF STATE is "exiting" exit program and break loop
