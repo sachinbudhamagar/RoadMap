@@ -173,7 +173,7 @@
     create main function allow to choose between making payment, checking funds, or exiting
     create object for class and invoke the main function start the program
 
-# 2. State of File Upload system
+# 3. State of File Upload system
 
     state: idle
     state: waiting_for_file
@@ -281,22 +281,69 @@
             
 # English only Algorithm of File Upload System
 
-1: Define STATE as "idle"
-2: Initiate WHILE loop
-3: IF STATE is "idle", display "ready for file upload" and wait for user action
-    IF user select file, store file and 
-    IF user select exit, exit program
-4: ELSE IF STATE is "file_selected", validate file(name, size, type)
-    IF validation passed STATE is "file_validated", 
-    ELSE STATE is "file_validation_failed" and display "error message"
-5: ELSE IF STATE is "file_validated", dispaly "Ready to upload file" and wait for user action
-    IF user click upload STATE IS "upload_in_process", 
-    ELSE IF user cancels STATE is "canelled", 
-    ELSE IF user changes file STATE is "waiting_for_file"
-6: ELSE IF STATE is "upload_in_progress", start uploading and show progress bar
-    IF upload successfull STATE is "upload_completed" ELSE "upload_failed", and store error message
-7: ELSE IF STATE is "upload_completed" display "upload successfull" and reset form where STATE is "idle"
-8: ELSE IF STATE is "upload_failed" display "error_message" and ask user either to "retry or cancel"
-    IF user click retry restart program where STATE is "ready_to_upload" else STATE is "cancelled"
-9: ELSE IF STATE is "cancelled"  clear selected file, reset form and restart where STATE is "idle"
-10: ELSE IF STATE is "exiting" exit program and break loop
+    1: Define STATE as "idle"
+    2: Initiate WHILE loop
+    3: IF STATE is "idle", display "ready for file upload" and wait for user action
+        IF user select file, store file and 
+        IF user select exit, exit program
+    4: ELSE IF STATE is "file_selected", validate file(name, size, type)
+        IF validation passed STATE is "file_validated", 
+        ELSE STATE is "file_validation_failed" and display "error message"
+    5: ELSE IF STATE is "file_validated", dispaly "Ready to upload file" and wait for user action
+        IF user click upload STATE IS "upload_in_process", 
+        ELSE IF user cancels STATE is "canelled", 
+        ELSE IF user changes file STATE is "waiting_for_file"
+    6: ELSE IF STATE is "upload_in_progress", start uploading and show progress bar
+        IF upload successfull STATE is "upload_completed" ELSE "upload_failed", and store error message
+    7: ELSE IF STATE is "upload_completed" display "upload successfull" and reset form where STATE is "idle"
+    8: ELSE IF STATE is "upload_failed" display "error_message" and ask user either to "retry or cancel"
+        IF user click retry restart program where STATE is "ready_to_upload" else STATE is "cancelled"
+    9: ELSE IF STATE is "cancelled"  clear selected file, reset form and restart where STATE is "idle"
+    10: ELSE IF STATE is "exiting" exit program and break loop
+
+# 4. State of Job Apply
+
+    state: idle
+    state: waiting_for_personal_details
+    state: personal_details_validated
+    state: personal_details_validation_failed
+    state: waiting_for_cv
+    state: cv_selected
+    state: cv_validated
+    state: cv_validation_failed
+    state: application_ready
+    state: submission_failed
+    state: application_submitted
+    state: awaiting_retry
+    state: cancelled
+    state: exiting_program
+
+# Transitions
+
+    idle + enter_personal_details_process -> waiting_for_personal_details
+    waiting_for_personal_details + personal_details_submitted -> validating_personal_details
+
+    validating_personal_details + valid -> personal_details_validated
+    validating_personal_details + invalid -> personal_details_validation_failed
+
+    personal_details_validated + upload_cv_process -> waiting_for_cv
+    waiting_for_cv + cv_chosen -> cv_selected
+
+    cv_selected + cv_uploaded -> validating_cv
+    validating_cv + valid -> cv_validated
+    validating_cv + invalid -> cv_validation_failed
+
+    cv_validated -> application_ready
+    application_ready + requested_submit -> submission_in_process
+    
+    submission_in_process + succeed -> application_submitted
+    submission_in_process + failed -> submission_failed
+    
+    submission_failed + retry_requested -> awaiting_retry
+    submission_failed + cancel_requested -> cancelled
+
+    application_submitted -> exiting_program
+
+# 5. State of ATM
+
+    state:
