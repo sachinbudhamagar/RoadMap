@@ -320,29 +320,180 @@
 
 # Transitions
 
-    idle + enter_personal_details_process -> waiting_for_personal_details
+    idle + enter_personal_details_progress -> waiting_for_personal_details
     waiting_for_personal_details + personal_details_submitted -> validating_personal_details
 
     validating_personal_details + valid -> personal_details_validated
     validating_personal_details + invalid -> personal_details_validation_failed
 
-    personal_details_validated + upload_cv_process -> waiting_for_cv
+    personal_details_validated + upload_cv_progress -> waiting_for_cv
     waiting_for_cv + cv_chosen -> cv_selected
 
-    cv_selected + cv_uploaded -> validating_cv
+    cv_selected + validation_started -> validating_cv
     validating_cv + valid -> cv_validated
     validating_cv + invalid -> cv_validation_failed
 
     cv_validated -> application_ready
-    application_ready + requested_submit -> submission_in_process
+    application_ready + requested_submit -> submission_in_progress
+
+    submission_in_progress + succeed -> application_submitted
+    submission_in_progress + failed -> submission_failed
     
-    submission_in_process + succeed -> application_submitted
-    submission_in_process + failed -> submission_failed
-    
+    personal_details_validation_failed + retry_requested -> application_ready
+    cv_validation_failed + retry_requested -> waiting_for_cv
     submission_failed + retry_requested -> awaiting_retry
     submission_failed + cancel_requested -> cancelled
 
     application_submitted -> exiting_program
+
+# Pseudocode
+
+    STATE = "idle"
+
+    WHILE system is running:
+
+        IF STATE = "idle"
+            DISPLAY "1. Start Application 2. Exit"
+            wait for user_input
+
+            IF user_chooses_start:
+                STATE = "waiting_for_personal_details(name, age, degree, experience)"
+            ELSE IF user_chooses_exit:
+                STATE = "exiting_program"
+
+        ELSE IF STATE == "waiting_for_personal_details":
+            DISPLAY "Enter your personal details:"
+            COLLECT name, email, phone, address
+
+            IF validation_passed:
+                STORE personal_details
+                STATE = "personal_details_validated"
+            ELSE:
+                STORE error_message
+                STATE = "personal_details_validation_failed"
+
+        ELSE IF STATE == personal_details_validation_failed:
+            DISPLAY ask user either to exit or retry
+            INPUT cancel or retry
+
+            IF user enter cancel:
+                STATE = "cancelled"
+            ELSE IF user enter retry:
+                STATE = "waiting_for_personal_details"
+        
+        ELSE IF STATE == "personal_details_validated":
+            DISPLAY "personal details saved successfully"
+            STATE = "waiting_for_cv"
+
+        ELSE IF STATE == "waiting_for_cv"
+            DISPLAY upload your CV(pdf/DOCX, 5MB)
+            wait for file_selection
+
+            IF file_selected:
+                STATE = "cv_selected"
+                STORE selected file
+            ELSE IF user cancel:
+                STATE = "cancelled"
+        
+        ELSE IF STATE == "cv_selected":
+            DISPLAY validating cv(type, size)
+            IF validation_passed:
+                STATE = "cv_validated"
+            ELSE:
+                STATE = "cv_validation_failed"
+                STORE error message
+
+        ELSE IF STATE == "cv_validation_failed":
+            DISPLAY "CV Error: " + error_message
+            DISPLAY "either to retry or cancel"
+
+            IF user_chooses_retry:
+                STATE = "waiting_for_cv"
+            ELSE:
+                STATE = "cancelled"
+
+        ELSE IF STATE == "cv_validated"
+            DISPLAY "CV uploaded and validated"
+            STATE = "application_ready"
+
+        ELSE IF STATE == "application_ready":
+            DISPLAY "Review your application"
+            DISPLAY personal_details
+            DISPLAY cv_filename
+            DISPLAY "1. Submit Application 2. Edit Details 3. Cancel"
+            INPUT 1/2/3:
+            
+            wait for user action
+            IF user enter submit:
+                STATE = "submission_failed"
+            ELSE IF user edit:
+                STATE = "waiting_for_personal_details"
+            ELSE:
+                STATE = "cancelled"
+
+        ELSE IF STATE == "submission_failed":
+            IF progress submitted:
+                STATE = "application_submitted"
+            ELSE:
+                STORE error message
+                STATE = "awaiting_retry"
+
+        ELSE IF STATE == awaiting_retry:
+            ask user either to retry or cancel
+            DISPLAY "1. Retry 2. Cancel"
+
+            IF user enter retry:
+                STATE = "application_ready"
+            ELSE IF user cancels:
+                STATE = "cancelled"
+
+        ELSE IF STATE == "application_submitted"
+            DISPLAY "Application submitted successfully!"
+            SEND confirmation_email
+            STATE = "idle"
+
+        ELSE IF STATE == "cancelled":
+            DISPLAY "Application cancelled"
+            CLEAR selected_file
+            RESET form
+            STATE = "idle"
+
+        ELSE IF STATE == "exiting_program":
+            DISPLAY "Thank you for using Job Application System"
+            BREAK  loop
+        
+        
+# English only Algorithm of Job Apply system
+
+    1. DEFINE STATE as idle
+    2. INITIATE WHILE LOOP
+    3. WHILE STATE is idle, provide option for start application and exit, and wait for user input
+            IF user chooses start, STATE is waiting_for_personal_dtails else exiting_program
+    4. ELSE IF STATE is waiting_for_personal_details, enter personal details, and validate it
+            IF validation_passed store personal details and STATE is personal_details_validated 
+            ELSE STORE error_message and STATE IS personal_details_validation_failed
+    5. ELSE IF STATE is personal_details_validation_failed DISPLAY and ASK user either to retry or cancel
+            IF user enter cancel STATE is cancelled ELSE STATE is waiting_for_personal_details
+    6. ELSE IF STATE is personal_details_validated, DISPLAY personal details saved and STATE is waiting_for_cv
+    7. ELSE IF STATE is waiting_for_cv, DISPLAY upload your cv and wait for file_selection
+            IF file_selected, STATE is cv_selected and store selected file 
+            ELSE IF user cancel STATE is cancelled
+    8. ELSE IF STATE is cv_selected, DISPLAY validating cv 
+            IF validation_passed STATE is cv_validated ELSE STATE is cv_validation_failed, STORE error message
+    9. ELSE IF STATE is cv_validation_falied, DISPLAY cv error with error_message and ask user either to retry or cancel
+            IF user_chooses_retry STATE is waiting_for_cv ELSE STATE is cancelled
+    10. ELSE IF STATE is cv_validated, DISPLAY cv uploaded, and validated and STATE is application_ready
+    11. ELSE IF STATE is application_ready, DISPLAY review application, personal_details, cv_filename, and ask user for Submit, Edit, or Cancel
+            IF user enter submit STATE is submission_failed 
+            ELSE IF user edit STATE is waiting_for_personal_details 
+            ELSE STATE is cancelled
+    12. ELSE IF STATE is submission_failed STATE is application_submitted ELSE STATE is awaiting_retry and STORE error message
+    13. ELSE IF STATE is awaiting_retry, ask user either to retry or cancel
+            IF user enter retry STATE is application_retry
+            ELSE IF user cancels STATE is cancelled
+    14. ELSE IF STATE is application_submitted STATE is idle, DISPLAY application submitted successfully and send confirmation email
+    15. ELSE IF STATE is cancelled STATE is idle, DISPLAY appliation cancelled and reset form
+    16. ELSE IF STATE is exiting_program, BREAK loop and DISPLAY Thank you for using Job Application System message
 
 # 5. State of ATM
 
