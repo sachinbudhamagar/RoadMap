@@ -1,5 +1,5 @@
-# Task 3.1 — English-Only Algorithms
-
+# Task 3.1
+    
     Systems:
         1. Login
         2. Payment
@@ -64,7 +64,7 @@
     end
     
 
-# English only Algorithm of Login system
+# Algorithm of Login system
 
     1. define attempts and max attempts
     2. input username and password or quit program
@@ -159,7 +159,7 @@
     end
 
 
-# English only Algorithm of Payment system
+# Algorithm of Payment system
 
     create class and initial function for total fund as shared class state
     crete a payment function that accepts user input
@@ -279,7 +279,7 @@
         ELSE IF STATE == "exiting"
             BREAK loop
             
-# English only Algorithm of File Upload System
+# Algorithm of File Upload System
 
     1: Define STATE as "idle"
     2: Initiate WHILE loop
@@ -463,7 +463,7 @@
             BREAK  loop
         
         
-# English only Algorithm of Job Apply system
+# Algorithm of Job Apply system
 
     1. DEFINE STATE as idle
     2. INITIATE WHILE LOOP
@@ -495,6 +495,63 @@
     15. ELSE IF STATE is cancelled STATE is idle, DISPLAY appliation cancelled and reset form
     16. ELSE IF STATE is exiting_program, BREAK loop and DISPLAY Thank you for using Job Application System message
 
-# 5. State of ATM
+# 5. State of ATM System
 
-    state:
+    state: idle
+    state: waiting_for_card
+    state: card_inserted
+    state: validating_card
+    state: card_validated
+    state: card_validation_failed
+    state: waiting_for_pin
+    state: validating_pin
+    state: pin_validated
+    state: pin_validation_failed
+    state: waiting_for_withdrawal_amount
+    state: withdrawal_amount_entered
+    state: withdrawal_in_progress
+    state: withdrawal_succeeded
+    state: withdrawal_failed
+    state: awaiting_retry
+    state: cancelled
+    state: dispensing_cash
+    state: card_ejected
+    state: exiting_program
+
+# Transitions
+
+    idle + start_session -> waiting_for_card
+    waiting_for_card + card_detected -> card_inserted
+    waiting_for_card + timeout -> exiting_program
+
+    card_inserted + validate_card -> validating_card
+    validating_card + valid -> card_validated
+    validating_card + invalid -> card_validation_failed
+    card_validation_failed + -> awaiting_retry
+    
+    card_validated -> waiting_for_pin
+    waiting_for_pin + cancel_requested -> cancelled
+    waiting_for_pin + pin_submitted -> pin_entered
+
+    pin_entered + validate_pin -> validating_pin
+    validating_pin + valid -> pin_validated
+    validating_pin + invalid -> pin_validation_failed
+    pin_validation_failed -> waiting_for_pin
+
+    awaiting_retry + continue -> waiting_for_card
+    awaiting_retry + cancel -> cancelled
+
+    pin_validated -> waiting_for_withdrawal_amount
+    waiting_for_withdrawal_amount + cancel_requested -> cancelled
+    waiting_for_withdrawal_amount + amount_submitted -> withdrawal_amount_entered
+
+    withdrawal_amount_entered + process_withdrawal -> withdrawal_in_progress
+    withdrawal_in_progress + succeed -> withdrawal_succeeded
+    withdrawal_in_progress + failed -> withdrawal_failed
+
+    withdrawal_failed + retry_requested -> waiting_for_withdrawal_amount
+    withdrawal_failed + cancel_requested -> cancelled
+
+    withdrawal_succeeded -> dispensing_cash
+    dispensing_cash -> card_ejected
+    card_ejected -> exiting_program
