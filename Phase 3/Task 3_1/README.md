@@ -7,7 +7,7 @@
         4. Job apply
         5. ATM
 
-# 1. State of Login system
+# 1. State for Login system
 
     start
     state: inserting_credentials
@@ -19,7 +19,7 @@
     state: exiting_program
     end
 
-# Transitions
+# Transitions for Login system
 
     start
     inserting_credentials + credentials_received -> validating_credentials
@@ -36,7 +36,7 @@
     reach_max_attempts + force_exit -> exiting_program
     end
     
-# Pseudocode
+# Pseudocode for Login system
 
     start
     attempts is 0
@@ -64,7 +64,7 @@
     end
     
 
-# Algorithm of Login system
+# Algorithm for Login system
 
     1. define attempts and max attempts
     2. input username and password or quit program
@@ -77,7 +77,7 @@
     9. if press y, restarting input else terminate program
 
 
-# 2. State of Payment System
+# 2. State for Payment System
 
     start
     state: inserting_input
@@ -90,7 +90,7 @@
     state: exiting_program
     end
 
-# Transitions
+# Transitions for Payment system
 
     start
     inserting_input + input_received -> validate_input
@@ -111,7 +111,7 @@
     success -> exiting_program
     end
 
-# Pseudocode
+# Pseudocode for Payment system
 
     start
     create class
@@ -159,7 +159,7 @@
     end
 
 
-# Algorithm of Payment system
+# Algorithm for Payment system
 
     create class and initial function for total fund as shared class state
     crete a payment function that accepts user input
@@ -173,7 +173,7 @@
     create main function allow to choose between making payment, checking funds, or exiting
     create object for class and invoke the main function start the program
 
-# 3. State of File Upload system
+# 3. State for File Upload system
 
     state: idle
     state: waiting_for_file
@@ -187,7 +187,7 @@
     state: calcalled
     state: exiting
 
-# Transitions
+# Transitions for File Upload System
     
     idle + start_upload_process -> waiting_for_file
     waiting_for_file + file_chosen -> file_selected
@@ -210,7 +210,7 @@
 
     upload_completed -> exiting_program
 
-# Pseudocode
+# Pseudocode for File Upload System
     
     start
     STATE = "idle"
@@ -279,7 +279,7 @@
         ELSE IF STATE == "exiting"
             BREAK loop
             
-# Algorithm of File Upload System
+# Algorithm for File Upload System
 
     1: Define STATE as "idle"
     2: Initiate WHILE loop
@@ -301,7 +301,7 @@
     9: ELSE IF STATE is "cancelled"  clear selected file, reset form and restart where STATE is "idle"
     10: ELSE IF STATE is "exiting" exit program and break loop
 
-# 4. State of Job Apply
+# 4. State for Job Apply
 
     state: idle
     state: waiting_for_personal_details
@@ -318,7 +318,7 @@
     state: cancelled
     state: exiting_program
 
-# Transitions
+# Transitions for Job Apply system
 
     idle + enter_personal_details_progress -> waiting_for_personal_details
     waiting_for_personal_details + personal_details_submitted -> validating_personal_details
@@ -346,7 +346,7 @@
 
     application_submitted -> exiting_program
 
-# Pseudocode
+# Pseudocode for Job Apply system
 
     STATE = "idle"
 
@@ -463,7 +463,7 @@
             BREAK  loop
         
         
-# Algorithm of Job Apply system
+# Algorithm for Job Apply system
 
     1. DEFINE STATE as idle
     2. INITIATE WHILE LOOP
@@ -495,7 +495,7 @@
     15. ELSE IF STATE is cancelled STATE is idle, DISPLAY appliation cancelled and reset form
     16. ELSE IF STATE is exiting_program, BREAK loop and DISPLAY Thank you for using Job Application System message
 
-# 5. State of ATM System
+# 5. State for ATM System
 
     state: idle
     state: waiting_for_card
@@ -518,7 +518,7 @@
     state: card_ejected
     state: exiting_program
 
-# Transitions
+# Transitions for ATM system
 
     idle + start_session -> waiting_for_card
     waiting_for_card + card_detected -> card_inserted
@@ -555,3 +555,144 @@
     withdrawal_succeeded -> dispensing_cash
     dispensing_cash -> card_ejected
     card_ejected -> exiting_program
+
+# Pseudocode for ATM system
+
+    STATE = "idle"
+    WHILE system_running:
+
+        IF STATE == "idle":
+            STATE = "waiting_for_card"
+
+        ELSE IF STATE == "waiting_for_card":
+            IF card inserted:
+                STATE = "card_inserted"
+            ELSE:
+                DISPLAY timeout 
+                STATE = "exiting_program"
+        
+        ELSE IF STATE == "card_inserted":
+            DISPLAY card detected and validating card
+            STATE = "validating_card"
+        
+        ELSE IF STATE == "validating_card":
+            IF card is valid:
+                DISPLAY card validated
+                STATE = "card_validated"
+            ELSE:
+                DISPLAY error message
+                STATE = "card_validation_failed"
+        
+        ELSE IF STATE == "card_validated":
+            DISPLAY enter pin
+            STATE = "waiting_for_pin"
+        
+        ELSE IF STATE == "card_validation_failed":
+            DISPLAY error message
+            STATE = "awaiting_retry"
+        
+        ELSE IF STATE == "waiting_for_pin":
+            INPUT "Enter your pin": 
+            IF pin submitted:
+                STATE = "pin_entered"
+            ELSE:
+                DISPLAY cancel message
+                STATE = "cancelled"
+        
+        ELSE IF STATE == "pin_entered":
+            STATE = "validating_pin"
+
+        ELSE IF STATE == "validating_pin"
+            IF validation passed:
+                STATE = "pin_validated"
+            ELSE:
+                STATE = "pin_validation_failed"
+        
+        ELSE IF STATE == "pin_validation_failed":
+            STATE = "waiting_for_pin"
+        
+        ELSE IF STATE == "awaiting_retry":
+            DISPLAY user either to cancel or retry
+            INPUT 1. for cancel, 2. for continue
+            IF INPUT is cancel:
+                STATE = "cancelled"
+            ELSE IF INPUT is continue:
+                STATE = "waiting_for_card"
+        
+        ELSE IF STATE == "pin_validated":
+            DISPLAY enter amount
+            STATE = "waiting_for_withdrawal_amount"
+        
+        ELSE IF STATE == "waiting_for_withdrawal_amount":
+            INPUT 1. for cancel, 2. for amount submit
+            IF INPUT is submit:
+                STATE = "withdrawal_amount_entered"
+            ELSE IF INPUT is cancel: 
+                STATE = "cancelled"
+
+        ELSE IF STATE == "withdrawal_amount_entered":
+            STATE = "withdrawal_in_progress"
+        
+        ELSE IF STATE == "withdrawal_in_progress":
+            IF withdrawal succeed:
+                STATE = "withdrawal_succeeded"
+            ELSE: 
+                STATE = "withdrawal_failed"
+        
+        ELSE IF STATE == "withdrawal_failed":
+            INPUT 1. for retry, 2. for cancel
+            IF INPUT is retry:
+                STATE = "waiting_for_withdrawal_amount"
+            ELSE IF INPUT is cancel:
+                STATE = "cancelled"
+        
+        ELSE IF STATE == "withdrawal_succeeded":
+            DISPLAY dispensing cash
+            STATE = "dispensing_cash"
+        
+        ELSE IF STATE == "dispensing_cash":
+            STATE = "card_ejected"
+
+        ELSE IF STATE == "card_ejected":
+            DISPLAY collect your card
+            STATE = "exiting_program"
+        
+        ELSE IF STATE == "exiting_program":
+            DISPLAY "Thank you for using ATM"
+            BREAK loop
+
+# Algorithm for ATM system
+
+    1. DEFINE STATE as idle 
+    2. INITAIATE WHILE loop
+    3. WHILE system is running STATE is waiting_for_card
+    4. ELSE IF STATE is waiting_for_card
+            IF card is inserted STATE is card_inserted else DISPLAY timeout and STATE is exiting_program
+    5. ELSE IF STATE is card_inserted DISPLAY validating process and STATE is validating_card
+    6. ELSE IF STATE is validating_card 
+            IF card is valid STATE is card_validated ELSE STATE is card_validation_failed and DISPLAY error message
+    7. ELSE IF STATE is card_validated, STATE is waiting_for_pin
+    8. ELSE IF STATE is card_validation_failed, STATE is awaiting_retry and DISPLAY error message
+    9. ELSE IF STATE is waiting_for_pin, 
+            INPUT enter your pin 
+            IF pin submitted STATE is pin_entered ELSE STATE is cancelled and DISPLAY cancel message
+    10. ELSE IF STATE is pin_entered STATE is validating_pin 
+    11. ELSE IF STATE is validating_pin,  IF validation passed STATE is pin_validated ELSE STATE is pin_validation_failed
+    12. ELSE IF STATE is pin_validation_failed, STATE is waiting_for_pin
+    13. ELSE IF STATE is awaiting_retry, DISPLAY user either to cancel or contine
+            INPUT enter 1 for cancel and 2 for continue
+            IF INPUT is cancel, STATE is cancelled ELSE IF INPUT is continue STATE is waiting_for_card
+    14. ELSE IF STATE is pin_validated, STATE is waiting_for_withdrawal_amount and DISPLAY enter amount to withdraw
+    15. ELSE IF STATE is waiting_for_withdrawal_amount, Ask either to submit or cancel
+            INPUT 1 for cancel and 2 for amount submit
+            IF INPUT is submit, STATE is withdrawal_amount_entered ELSE IF INPUT is cancel STATE is cancelled
+    16. ELSE IF STATE is withdrawal_amount_entered, STATE is withdrawal_in_progress
+    17. ELSE IF STATE is withdrawal_in_progress, 
+            IF withdrawal succeed STATE is withdrawal_succeeded ELSE STATE is withdrawal_failed
+    18. ELSE IF STATE is withdrawal_failed
+            INPUT 1 for retry and 2 for cancel
+            IF INPUT is retry, STATE is waiting_for_withdrawal_amount ELSE IF INPUT is cancel STATE is cancelled
+    19. ELSE IF STATE is withdrawal_succeeded, STATE is dispensing_cash and DISPLAY dispensing cash
+    20. ELSE IF STATE is dispensing_cash, STATE is card_ejected
+    21. ELSE IF STATE is card_ejected, STATE is exiting_program and DISPLAY collect your card
+    22. ELSE IF STATE is exiting_program, STATE is exiting_program and BREAK loop along with Thank you message 
