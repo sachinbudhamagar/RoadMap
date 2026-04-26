@@ -35,7 +35,6 @@ Example format (DO NOT solve):
 If you can’t list states, you’re not allowed to code.
 
 # 🔨 PHASE 1 — MICRO LOGIC DRILLS (NO PROJECTS)
-    These look easy. They are not.
 
 # Task 1.1 — Input Gate
 
@@ -94,7 +93,7 @@ If you can’t list states, you’re not allowed to code.
 
 # 🧱 PHASE 3 — ALGORITHM BEFORE CODE (MANDATORY)
 
-# Task 3.1 — English-Only Algorithms
+# Task 3.1
 
     Pick any system:
         Login
